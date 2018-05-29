@@ -19,19 +19,20 @@ export class HomeComponent {
 
   public processList : Array<Process> = [];
 
-  addProcess() {
-  let process1 = new Process();
-  process1.capacity = 3;
-  process1.name = 'Process One'+ this.processCounter;
+  public addProcess() {
+  let process = new Process();
+  process.capacity = 3;
+  process.name = 'Process'+ this.processCounter;
   this.processCounter = this.processCounter + 1;
-  process1.outputQueue = new EntityQueue();
-  this.finalQueue = process1.outputQueue;
+  process.outputQueue = new EntityQueue();
+  this.finalQueue = process.outputQueue;
   if(this.processCounter == 1){
-    process1.inputQueue = this.backlog;
+    process.inputQueue = this.backlog;
   } else {
-    process1.inputQueue = this.finalQueue;
+    process.inputQueue = this.finalQueue;
   }
-  this.processList.push(process1);
+  console.log(process.name)
+  this.processList.push(process);
   }
 
   getProcesses () {
