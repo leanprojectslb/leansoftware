@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   public backlog = new EntityQueue();
   public finalQueue: EntityQueue;
-  public processCounter = 1;
+  public processCounter = 0;
   public processList: Array<Process> = [];
 
   public processName: string = "";
@@ -32,11 +32,11 @@ export class HomeComponent implements OnInit {
 
 
   public addProcess() {
-    let process = new Process(this.processCapacity, this.processName);
+    const process = new Process(this.processCapacity, this.processName);
     this.processCapacity = 0;
     this.processName = "";
 
-    if (this.processCounter == 1) {
+    if (this.processCounter == 0) {
       process.inputQueue = this.backlog;
     } else {
       process.inputQueue = this.finalQueue;
