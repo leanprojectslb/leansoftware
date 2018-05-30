@@ -26,6 +26,17 @@
         <label> Process Capacity: </label>
         <input type ="number" [(ngModel)]="processCapacity"/>
     </div>
+    <div>
+        <button type="button" (click)="addTask()"> Add Task</button>
+        <div>
+            <label> Task Name: </label>
+            <input type="text" [(ngModel)]="taskName" />
+        </div>
+        <div>
+            <label> Effort needed for Task: </label>
+            <input type="number" [(ngModel)]="taskEffort" />
+        </div>
+    </div>
     
 </div>
 

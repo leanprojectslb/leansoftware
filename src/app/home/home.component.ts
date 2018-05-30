@@ -18,6 +18,9 @@ export class HomeComponent implements OnInit {
   public processName: string = "";
   public processCapacity: number = 0;
 
+  public taskName: string = "";
+  public taskEffort: number = 0;
+
   public simulate() {
     this.processList.forEach(process => console.log(process.name) + " " + console.log(process.inputQueue) + " " + console.log(process.outputQueue) + " " + console.log(process.capacity))
     this.backlog.taskList.forEach(task => console.log(task));
@@ -48,27 +51,15 @@ export class HomeComponent implements OnInit {
   }
 
   // TODO(team) add effort
-  public addTask(taskName: string) {
-    const task = new Task(taskName, 1);
+  public addTask() {
+    const task = new Task(this.taskName, this.taskEffort);
     this.backlog.taskList.push(task);
+    this.taskEffort = 0;
+    this.taskName = "";
   }
 
   ngOnInit() {
-    this.addProcess();
-    this.addProcess();
-    this.addProcess();
 
-    this.addTask('task1');
-    this.addTask('task2');
-    this.addTask('task3');
-    this.addTask('task4');
-    this.addTask('task5');
-    this.addTask('task6');
-    this.addTask('task7');
-    this.addTask('task8');
-    this.addTask('task9');
-    this.addTask('task10');
-    this.addTask('task11');
   }
 
 }
