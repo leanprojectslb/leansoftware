@@ -7,4 +7,12 @@
         <div class = "process">{{process.name}}</div>
         <div class = "queue">{{process.outputQueue.taskList}}</div>
     </div>
+    <div>
+        <label> Process Name: </label>
+        <input type ="text" [(ngModel)]="processName"/>
+    </div>
+    <div>
+        <label> Process Capacity: </label>
+        <input type ="number" [(ngModel)]="processCapacity"/>
+    </div>
 </div>
