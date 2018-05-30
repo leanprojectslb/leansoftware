@@ -10,17 +10,11 @@ import { EntityQueue } from '../model/EntityQueue';
 export class HomeComponent implements OnInit {
 
   public backlog = new EntityQueue();
-  // set array for task
-
   public finalQueue: EntityQueue;
-  // set array for task
-
-  public processCounter: number = 1;
-
+  public processCounter = 1;
   public processList: Array<Process> = [];
 
   public simulate() {
-
     this.processList.forEach(process => console.log(process.name) + " " + console.log(process.inputQueue) + " " + console.log(process.outputQueue) + " " + console.log(process.capacity))
     this.backlog.taskList.forEach(task => console.log(task));
 
