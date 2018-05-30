@@ -7,8 +7,8 @@ export class Process {
   public outputQueue: EntityQueue;
 
   constructor(capacity: number, name: string) {
-    this.capacity = this.capacity;
-    this.name = this.name;
+    this.capacity = capacity;
+    this.name = name;
   }
 
   public doWork() {
