@@ -29,9 +29,9 @@ export class HomeComponent implements OnInit {
 
 
   public addProcess() {
-    let process = new Process();
-    process.capacity = this.processCapacity;
-    process.name = this.processName;
+    let process = new Process(this.processCapacity, this.processName);
+    this.processCapacity = 0;
+    this.processName = "";
 
     if (this.processCounter == 1) {
       process.inputQueue = this.backlog;
@@ -43,8 +43,6 @@ export class HomeComponent implements OnInit {
     this.processCounter++;
 
     this.processList.push(process);
-    this.processCapacity = 0;
-    this.processName = "";
   }
 
   // TODO(team) add effort

@@ -6,6 +6,11 @@ export class Process {
   public inputQueue: EntityQueue;
   public outputQueue: EntityQueue;
 
+  constructor(capacity: number, name: string) {
+    this.capacity = this.capacity;
+    this.name = this.name;
+  }
+
   public doWork() {
     console.log("Process " + this.name);
     console.log("tasks before work");
