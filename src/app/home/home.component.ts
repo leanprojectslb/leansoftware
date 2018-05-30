@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
 
   public backlog = new EntityQueue();
   public finalQueue: EntityQueue;
-  public processCounter = 1;
+  public processCounter = 0;
   public processList: Array<Process> = [];
 
   public processName: string = "";
@@ -29,11 +29,11 @@ export class HomeComponent implements OnInit {
 
 
   public addProcess() {
-    let process = new Process(this.processCapacity, this.processName);
+    const process = new Process(this.processCapacity, this.processName);
     this.processCapacity = 0;
     this.processName = "";
 
-    if (this.processCounter == 1) {
+    if (this.processCounter == 0) {
       process.inputQueue = this.backlog;
     } else {
       process.inputQueue = this.finalQueue;
@@ -52,15 +52,15 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.processName = 'Process 1';
+    this.processCapacity = 4;
     this.addProcess();
+    this.processName = 'Process 2';
+    this.processCapacity = 2;
     this.addProcess();
+    this.processName = 'Process 3';
+    this.processCapacity = 3;
     this.addProcess();
-    this.processList[0].name = 'Process 1';
-    this.processList[0].capacity = 4;
-    this.processList[1].name = 'Process 2';
-    this.processList[1].capacity = 2;
-    this.processList[2].name = 'Process 3';
-    this.processList[2].capacity = 3;
 
     this.addTask('task1');
     this.addTask('task2');
