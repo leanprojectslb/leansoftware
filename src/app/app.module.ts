@@ -7,7 +7,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 
 import { HomeComponent } from './home/home.component';
-import { LocationStrategy, HashLocationStrategy } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -22,7 +21,7 @@ import { LocationStrategy, HashLocationStrategy } from '@angular/common';
     RouterModule.forRoot(rootRouterConfig, { useHash: true })
   ],
   providers: [
-    
+
   ],
   bootstrap: [ AppComponent ]
 })
