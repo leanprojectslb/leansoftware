@@ -57,7 +57,39 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.addProcess();
+    this.addProcess();
+    this.addProcess();
+    this.processList[0].name = 'Process 1';
+    this.processList[0].capacity = 4;
+    this.processList[1].name = 'Process 2';
+    this.processList[1].capacity = 2;
+    this.processList[2].name = 'Process 3';
+    this.processList[2].capacity = 3;
 
+    this.taskEffort = 1;
+    this.taskName = 'task1';
+    this.addTask();
+
+    this.taskEffort = 1;
+    this.taskName = 'task2';
+    this.addTask();
+
+    this.taskEffort = 8;
+    this.taskName = 'task3';
+    this.addTask();
+
+    this.taskEffort = 4;
+    this.taskName = 'task4';
+    this.addTask();
+
+    this.taskEffort = 4;
+    this.taskName = 'task5';
+    this.addTask();
+
+    this.taskEffort = 2;
+    this.taskName = 'task6';
+    this.addTask();
   }
 
 }
