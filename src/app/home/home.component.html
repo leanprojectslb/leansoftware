@@ -1,7 +1,27 @@
 <h3>Process Simulation Application</h3>
 <div>
-    <button type="button" (click)="addProcess()"> Add Process</button>
-    <button type="button" (click)="simulate()"> Iterate</button>
+  <div>
+    <label> Process Name: </label>
+    <input type="text" [(ngModel)]="processName"/>
+  </div>
+  <div>
+    <label> Process Capacity: </label>
+    <input type="number" [(ngModel)]="processCapacity"/>
+  </div>
+  <button type="button" (click)="addProcess()"> Add Process</button>
+
+  <div>
+    <div>
+      <label> Task Name: </label>
+      <input type="text" [(ngModel)]="taskName"/>
+    </div>
+    <div>
+      <label> Effort needed for Task: </label>
+      <input type="number" [(ngModel)]="taskEffort"/>
+    </div>
+    <button type="button" (click)="addTask()"> Add Task</button>
+  </div>
+  <button type="button" (click)="simulate()"> Iterate</button>
 </div>
 
 <div class = "flex-container" >
@@ -13,30 +33,10 @@
             </span>
         </div>
         <div class="task-box">
-        <div class = "queue" *ngFor= "let task of process.outputQueue.taskList">                
+        <div class = "queue" *ngFor= "let task of process.outputQueue.taskList">
                 {{task}}
         </div>
         </div>
     </div>
-    <div>
-        <label> Process Name: </label>
-        <input type ="text" [(ngModel)]="processName"/>
-    </div>
-    <div>
-        <label> Process Capacity: </label>
-        <input type ="number" [(ngModel)]="processCapacity"/>
-    </div>
-    <div>
-        <button type="button" (click)="addTask()"> Add Task</button>
-        <div>
-            <label> Task Name: </label>
-            <input type="text" [(ngModel)]="taskName" />
-        </div>
-        <div>
-            <label> Effort needed for Task: </label>
-            <input type="number" [(ngModel)]="taskEffort" />
-        </div>
-    </div>
-    
 </div>
 
