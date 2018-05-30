@@ -1,3 +1,16 @@
 h3 {
 text-align: center;
 }
+.flex-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.process {
+    background-color: orange;
+    width: 5%;
+}
+.queue {
+    background-color: burlywood;
+    padding: 10%;
+}
