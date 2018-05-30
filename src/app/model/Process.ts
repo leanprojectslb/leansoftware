@@ -16,8 +16,13 @@ export class Process {
         break;
       }
       const currentElement = this.inputQueue.taskList[0];
-      this.outputQueue.taskList.push(currentElement);
-      this.inputQueue.taskList = this.inputQueue.taskList.slice(1, this.inputQueue.taskList.length)
+      currentElement.remainingEffort--;
+
+      if (currentElement.remainingEffort === 0) {
+        currentElement.remainingEffort = currentElement.effort;
+        this.outputQueue.taskList.push(currentElement);
+        this.inputQueue.taskList = this.inputQueue.taskList.slice(1, this.inputQueue.taskList.length);
+      }
     }
 
     console.log("tasks pending");
