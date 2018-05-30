@@ -19,6 +19,9 @@ export class HomeComponent implements OnInit {
 
   public processList: Array<Process> = [];
 
+  public processName: string = "";
+  public processCapacity: number = 0;
+
   public simulate() {
 
     this.addProcess();
@@ -50,8 +53,8 @@ export class HomeComponent implements OnInit {
 
   public addProcess() {
     let process = new Process();
-    process.capacity = 3;
-    process.name = 'Process' + this.processCounter;
+    process.capacity = this.processCapacity;
+    process.name = this.processName;
 
     if (this.processCounter == 1) {
       process.inputQueue = this.backlog;
@@ -64,6 +67,8 @@ export class HomeComponent implements OnInit {
 
     //console.log(process.name)
     this.processList.push(process);
+    this.processCapacity = 0;
+    this.processName = "";
   }
 
   public addTask(task: string) {
