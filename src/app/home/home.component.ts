@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Process } from '../model/Process';
 import { EntityQueue } from '../model/EntityQueue';
+import { Task } from "../model/Task";
 
 @Component({
   selector: 'home',
@@ -46,7 +47,9 @@ export class HomeComponent implements OnInit {
     this.processName = "";
   }
 
-  public addTask(task: string) {
+  // TODO(team) add effort
+  public addTask(taskName: string) {
+    const task = new Task(taskName, 1);
     this.backlog.taskList.push(task);
   }
 

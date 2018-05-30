@@ -21,6 +21,6 @@ export class Process {
     }
 
     console.log("tasks pending");
-    this.inputQueue.taskList.forEach(x => console.log(x))
+    this.inputQueue.taskList.forEach(x => x.print());
   }
 }
