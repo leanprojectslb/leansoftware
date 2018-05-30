@@ -8,9 +8,17 @@ text-align: center;
 }
 .process {
     background-color: orange;
-    width: 5%;
+    width: 80%;
 }
 .queue {
     background-color: burlywood;
-    padding: 10%;
+    margin: 10%;
+}
+.process-box {
+    margin: 10px;
+    width: 100%;
+}
+
+.arrow {
+    width: 20%;
 }

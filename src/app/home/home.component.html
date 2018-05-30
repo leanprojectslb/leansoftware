@@ -1,9 +1,20 @@
 <h3>Process Simulation Application</h3>
 <div>
     <button type="button" (click)="addProcess()"> Add Process</button>
-<div>
-    <div class = "flex-container" *ngFor= "let process of processList">
-        <div class = "process">{{process.name}}</div>
-        <div class = "queue">{{process.outputQueue.taskList}}</div>
+<div class = "flex-container" >
+    <div class="flex-direction: row" *ngFor= "let process of processList">
+       <div class="process-box">
+            <span class = "process">{{process.name}}</span>
+            <span class="arrow">
+                &rarr;
+            </span>
+        </div>
+        <div class="task-box">
+        <div class = "queue" *ngFor= "let task of process.outputQueue.taskList">                
+                {{task}}
+        </div>
+        </div>
     </div>
+    
 </div>
+
