@@ -16,10 +16,10 @@ export class HomeComponent implements OnInit {
   public processList: Array<Process> = [];
 
   public processName: string = "";
-  public processCapacity: number = 0;
+  public processCapacity: number = 1;
 
   public taskName: string = "";
-  public taskEffort: number = 0;
+  public taskEffort: number = 1;
 
   public simulate() {
     this.processList.forEach(process => console.log(process.name) + " " + console.log(process.inputQueue) + " " + console.log(process.outputQueue) + " " + console.log(process.capacity))
@@ -44,7 +44,7 @@ export class HomeComponent implements OnInit {
     this.processCounter++;
 
     this.processList.push(process);
-    this.processCapacity = 0;
+    this.processCapacity = 1;
     this.processName = "";
   }
 
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   public addTask() {
     const task = new Task(this.taskName, this.taskEffort);
     this.backlog.taskList.push(task);
-    this.taskEffort = 0;
+    this.taskEffort = 1;
     this.taskName = "";
   }
 
