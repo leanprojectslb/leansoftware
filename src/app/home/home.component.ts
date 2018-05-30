@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component,OnInit} from '@angular/core';
 import {Process} from '../model/Process';
 import {EntityQueue} from '../model/EntityQueue';
 
@@ -7,7 +7,7 @@ import {EntityQueue} from '../model/EntityQueue';
   styleUrls: ['./home.component.css'],
   templateUrl: './home.component.html'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit {
 
   public backlog = new EntityQueue();
   // set array for task
@@ -26,16 +26,19 @@ export class HomeComponent {
   this.processCounter = this.processCounter + 1;
   process.outputQueue = new EntityQueue();
   this.finalQueue = process.outputQueue;
+
+ 
+ 
   if(this.processCounter == 1){
     process.inputQueue = this.backlog;
   } else {
     process.inputQueue = this.finalQueue;
   }
+
   console.log(process.name)
   this.processList.push(process);
   }
-
-  getProcesses () {
-    
+  ngOnInit() {
   }
+
 }
