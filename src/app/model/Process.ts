@@ -4,14 +4,14 @@ import { Task } from "./Task";
 export class Process {
     public capacity: number;
     public workInProgressLimit: number;
-    public currentWorkInProgress: number = 0;
     public name: string;
+    public sourceQueue: EntityQueue;
     public inputQueue: EntityQueue;
     public outputQueue: EntityQueue;
 
     constructor(capacity: number, name: string, workInProgress: number) {
         if (!workInProgress || workInProgress < 1) {
-            workInProgress = 4;
+            workInProgress = 1;
             // throw Error("Work in progress limit must be strictly greater than 0");
         }
         if (!capacity || capacity < 1) {
@@ -23,7 +23,13 @@ export class Process {
     }
 
     public doWork() {
-        this.currentWorkInProgress = 0;
+        let currentWorkInProgress = this.inputQueue.taskList.length + this.outputQueue.taskList.length;
+        for (let i = currentWorkInProgress; i < this.workInProgressLimit; i++) {
+            if (this.sourceQueue.taskList.length > 0) {
+                let deletedTaskArray = this.sourceQueue.taskList.splice(0, 1);
+                this.inputQueue.taskList.push(deletedTaskArray[0]);
+            }
+        }
         let tempCapacity = this.capacity;
         console.log("Process " + this.name);
         console.log("tasks before work");
@@ -34,10 +40,6 @@ export class Process {
                 console.log("there is no task left for processing");
                 break;
             }
-            if (this.currentWorkInProgress === this.workInProgressLimit) {
-                console.log("we reached the work in progress limit");
-                break;
-            }
 
             const currentElement = this.inputQueue.taskList[0]
             if (tempCapacity < currentElement.remainingEffort) {
@@ -45,7 +47,7 @@ export class Process {
                 tempCapacity = 0;
             } else {
                 tempCapacity -= currentElement.remainingEffort
-                this.currentWorkInProgress++;
+                currentWorkInProgress++;
                 this.moveElementToNextQueue(currentElement);
             }
         }

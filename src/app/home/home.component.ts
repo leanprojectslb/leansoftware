@@ -11,7 +11,10 @@ import { Task } from "../model/Task";
 export class HomeComponent implements OnInit {
 
   public backlog = new EntityQueue();
+  public completedQueue = new EntityQueue();
+
   public finalQueue: EntityQueue;
+
   public processCounter = 0;
   public processList: Array<Process> = [];
   public iterationCounter: number = 0;
@@ -34,22 +37,21 @@ export class HomeComponent implements OnInit {
       this.processList[i].doWork();
     }
 
-    this.finalQueue.taskList.forEach(task => this.calculateCycleTime(task));
+    this.completedQueue.taskList = this.completedQueue.taskList.concat(this.finalQueue.taskList);
+    this.finalQueue.taskList = [];
+    this.completedQueue.taskList.forEach(task => this.calculateCycleTime(task));
   }
 
   public calculateAverageThroughput() {
 
     this.totalCycleTime = 0;
-    if (this.finalQueue.taskList.length != 0) {
-      this.finalQueue.taskList.forEach(task => this.totalCycleTime += task.cycleTime);
-      this.avgThroughput = this.totalCycleTime / this.finalQueue.taskList.length;
-      alert("Average Throughput is " +  this.avgThroughput);
+    if (this.completedQueue.taskList.length != 0) {
+      this.completedQueue.taskList.forEach(task => this.totalCycleTime += task.cycleTime);
+      this.avgThroughput = this.totalCycleTime / this.completedQueue.taskList.length;
+      alert("Average Throughput is " + this.avgThroughput);
     } else {
       alert("No task is completed yet");
     }
-
-
-
   }
 
   public calculateCycleTime(task: Task) {
@@ -61,10 +63,11 @@ export class HomeComponent implements OnInit {
     const process = new Process(this.processCapacity, this.processName, this.workInProgressLimit);
 
     if (this.processCounter == 0) {
-      process.inputQueue = this.backlog;
+      process.sourceQueue = this.backlog;
     } else {
-      process.inputQueue = this.finalQueue;
+      process.sourceQueue = this.finalQueue;
     }
+    process.inputQueue = new EntityQueue();
     process.outputQueue = new EntityQueue();
     this.finalQueue = process.outputQueue;
     this.processCounter++;
@@ -85,15 +88,18 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.processName = 'Analysis';
+    this.processCapacity = 4;
+    this.workInProgressLimit = 2;
     this.addProcess();
+    this.processName = 'Development';
+    this.processCapacity = 4;
+    this.workInProgressLimit = 4;
     this.addProcess();
+    this.processName = 'Testing';
+    this.processCapacity = 4;
+    this.workInProgressLimit = 3;
     this.addProcess();
-    this.processList[0].name = 'Process 1';
-    this.processList[0].capacity = 4;
-    this.processList[1].name = 'Process 2';
-    this.processList[1].capacity = 2;
-    this.processList[2].name = 'Process 3';
-    this.processList[2].capacity = 3;
 
     this.taskEffort = 1;
     this.taskName = 'task1';
@@ -103,20 +109,36 @@ export class HomeComponent implements OnInit {
     this.taskName = 'task2';
     this.addTask();
 
-    this.taskEffort = 8;
+    this.taskEffort = 1;
     this.taskName = 'task3';
     this.addTask();
 
-    this.taskEffort = 4;
+    this.taskEffort = 1;
     this.taskName = 'task4';
     this.addTask();
 
-    this.taskEffort = 4;
+    this.taskEffort = 3;
     this.taskName = 'task5';
     this.addTask();
 
     this.taskEffort = 2;
     this.taskName = 'task6';
+    this.addTask();
+
+    this.taskEffort = 8;
+    this.taskName = 'task7';
+    this.addTask();
+
+    this.taskEffort = 2;
+    this.taskName = 'task8';
+    this.addTask();
+
+    this.taskEffort = 5;
+    this.taskName = 'task9';
+    this.addTask();
+
+    this.taskEffort = 9;
+    this.taskName = 'task10';
     this.addTask();
 
     this.taskEffort = null;

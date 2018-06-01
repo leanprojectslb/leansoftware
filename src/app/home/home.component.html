@@ -16,8 +16,13 @@
     <div>
       <input type="text" [(ngModel)]="taskName" placeholder="Enter Task Name"/>
     </div>
-    <div>
-        <input type="number" [(ngModel)]="taskEffort" placeholder="Effort needed for Task default is 1"/>
+    <div class="taskForm flex-direction: column">
+        <div>
+            <input type="text" [(ngModel)]="taskName" placeholder="Enter Task Name" />
+        </div>
+        <div>
+            <input type="number" [(ngModel)]="taskEffort" placeholder="Effort needed for Task default is 1" />
+        </div>
     </div>
     <button type="button" class="taskBtn" (click)="addTask()"> Add Task</button>
   </div>
@@ -29,36 +34,53 @@
     <input class="flex-direction: column througput" type="button"  (click)="calculateAverageThroughput()" value ="Average throughput"/>
     <!-- <input type = "text" [(ngModel)] = "avgThroughput"/> -->
 
-  
 </div>
-
 <hr/>
-<div class = "flex-container" >
+<div class="flex-container">
     <div class="flex-direction: row">
         <div class="process-box">
-             <span class = "process">Backlogs</span>
-             <span class="arrow">
-                 &rarr;
-             </span>
-         </div>
-         <div class="task-box">
-            <div class = "queue" *ngFor= "let task of backlog.taskList">
-              {{task.name}} with effort = {{task.effort}} and remaining = {{task.remainingEffort}}
-            </div>
-          </div>
-     </div>
-    <div class="flex-direction: row" *ngFor= "let process of processList;  let i = index">
-       <div class="process-box">
-            <span class = "process">{{process.name}} with capacity = {{process.capacity}} and WIP {{process.workInProgressLimit}}</span>
-            <span class="arrow" *ngIf="(i+1) < processList.length">
+            <span class="process">Backlogs</span>
+            <span class="arrow">
                 &rarr;
             </span>
         </div>
         <div class="task-box">
-        <div class = "queue" *ngFor= "let task of process.outputQueue.taskList">
-                {{task.name}} with effort = {{task.effort}} and remaining = {{task.remainingEffort}} and cycleTime = {{task.cycleTime}}
-        </div>
+            <div class="queue-start" *ngFor="let task of backlog.taskList">
+                {{task.name}} (effort = {{task.effort}} and remaining = {{task.remainingEffort}})
+            </div>
         </div>
     </div>
+    <div class="flex-direction: row" *ngFor="let process of processList;  let i = index">
+        <div class="process-box">
+            <div><span class="process">{{process.name}} (capacity = {{process.capacity}} and WIP {{process.workInProgressLimit}})</span>
+            <span class="arrow">
+                &rarr;
+            </span></div>
+            <div class="process-child-box" style="width:100%">
+            <div class="task-box"> IN PROGRESS
+                    <div class="queue" *ngFor="let task of process.inputQueue.taskList">
+                        {{task.name}}  (effort = {{task.effort}} and remaining = {{task.remainingEffort}})
+                    </div>
+                </div>
+        
+                <div class="task-box"> DONE
+                    <div class="queue" *ngFor="let task of process.outputQueue.taskList">
+                        {{task.name}} with effort = {{task.effort}} and remaining = {{task.remainingEffort}}
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+       
+    </div>
+    <div class="flex-direction: row">
+            <div class="process-box">
+                <span class="process">Completed</span>
+            </div>
+            <div class="task-box">
+                <div class="queue-done" *ngFor="let task of completedQueue.taskList">
+                    {{task.name}} with effort = {{task.effort}} and remaining = {{task.remainingEffort}} and cycleTime = {{task.cycleTime}}
+                </div>
+            </div>
+        </div>
 </div>
-
