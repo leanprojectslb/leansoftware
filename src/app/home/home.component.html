@@ -34,10 +34,10 @@
       {{task.name}} with effort = {{task.effort}} and remaining = {{task.remainingEffort}}
     </div>
   </div>
-    <div class="flex-direction: row" *ngFor= "let process of processList">
+    <div class="flex-direction: row" *ngFor= "let process of processList;  let i = index">
        <div class="process-box">
             <span class = "process">{{process.name}} with capacity = {{process.capacity}} and WIP {{process.workInProgressLimit}}</span>
-            <span class="arrow">
+            <span class="arrow" *ngIf="(i+1) < processList.length">
                 &rarr;
             </span>
         </div>
