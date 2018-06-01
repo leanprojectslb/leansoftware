@@ -55,8 +55,9 @@ export class HomeComponent implements OnInit {
   }
 
   public calculateCycleTime(task: Task) {
-    if (task.cycleTime === 0)
-      task.cycleTime = this.iterationCounter - task.startTime
+    if (task.cycleTime === 0) {
+      task.cycleTime = this.iterationCounter - task.startTime;
+    }
   }
 
   public addProcess() {
@@ -74,14 +75,13 @@ export class HomeComponent implements OnInit {
 
     this.processList.push(process);
     this.processName = "";
-    this.processCapacity = null
+    this.processCapacity = null;
     this.workInProgressLimit = null;
   }
 
   public addTask() {
     const task = new Task(this.taskName, this.taskEffort, this.iterationCounter);
     this.backlog.taskList.push(task);
-    // this.taskEffort = 1;
     this.taskName = "";
     this.totalTaskNumber = this.backlog.taskList.length;
     this.taskEffort = null;
