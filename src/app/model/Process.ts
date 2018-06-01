@@ -1,4 +1,5 @@
 import { EntityQueue } from './EntityQueue';
+import { Task } from "./Task";
 
 export class Process {
   public capacity: number;
@@ -37,13 +38,17 @@ export class Process {
 
       if (currentElement.remainingEffort === 0) {
         this.currentWorkInProgress++;
-        currentElement.remainingEffort = currentElement.effort;
-        this.outputQueue.taskList.push(currentElement);
-        this.inputQueue.taskList = this.inputQueue.taskList.slice(1, this.inputQueue.taskList.length);
+        this.moveElementToNextQueue(currentElement);
       }
     }
 
     console.log("tasks pending");
     this.inputQueue.taskList.forEach(x => x.print());
+  }
+
+  private moveElementToNextQueue(task: Task): void {
+    task.remainingEffort = task.effort;
+    this.outputQueue.taskList.push(task);
+    this.inputQueue.taskList = this.inputQueue.taskList.slice(1, this.inputQueue.taskList.length);
   }
 }
