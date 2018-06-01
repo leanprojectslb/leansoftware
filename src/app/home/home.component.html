@@ -50,7 +50,7 @@
         </div>
         <div class="task-box">
         <div class = "queue" *ngFor= "let task of process.outputQueue.taskList">
-                {{task.name}} with effort = {{task.effort}} and remaining = {{task.remainingEffort}}
+                {{task.name}} with effort = {{task.effort}} and remaining = {{task.remainingEffort}} and cycleTime = {{task.cycleTime}}
         </div>
         </div>
     </div>

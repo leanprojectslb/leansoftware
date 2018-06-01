@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   public finalQueue: EntityQueue;
   public processCounter = 0;
   public processList: Array<Process> = [];
-
+  public iterationCounter : number = 0
   public processName: string = "";
   public processCapacity: number;
   public workInProgressLimit: number;
@@ -26,19 +26,29 @@ export class HomeComponent implements OnInit {
   public totalTaskNumber = 0;
   
   public simulate() {
+    this.iterationCounter++;
     this.processList.forEach(process => console.log(process.name) + " " + console.log(process.inputQueue) + " " + console.log(process.outputQueue) + " " + console.log(process.capacity))
     this.backlog.taskList.forEach(task => console.log(task));
 
     for (let i = this.processList.length - 1; i > -1; i--) {
       this.processList[i].doWork();
     }
+
+    this.finalQueue.taskList.forEach(task => this.calculateCycleTime(task))    
   }
 
   public calculateAverageThroughput() {
-    this.processList.forEach(process => process.outputQueue.taskList.forEach(task => this.totalCycleTime = this.totalCycleTime + task.cycleTime));
-    this.avgThroughput = this.totalCycleTime / this.totalTaskNumber;
+    this.totalCycleTime = 0;
+    if(this.finalQueue.taskList.length !=0 ){    
+    this.finalQueue.taskList.forEach(task => this.totalCycleTime +=  task.cycleTime);
+    this.avgThroughput = this.totalCycleTime / this.finalQueue.taskList.length;
+    }
   }
 
+  public calculateCycleTime(task : Task) {
+     if(task.cycleTime === 0)
+      task.cycleTime = this.iterationCounter - task.startTime
+  }
 
   public addProcess() {
     const process = new Process(this.processCapacity, this.processName, this.workInProgressLimit);
@@ -60,7 +70,7 @@ export class HomeComponent implements OnInit {
 
   // TODO(team) add effort
   public addTask() {
-    const task = new Task(this.taskName, this.taskEffort);
+    const task = new Task(this.taskName, this.taskEffort, this.iterationCounter);
     this.backlog.taskList.push(task);
     // this.taskEffort = 1;
     this.taskName = "";
