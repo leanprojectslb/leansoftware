@@ -16,11 +16,11 @@ export class HomeComponent implements OnInit {
   public processList: Array<Process> = [];
 
   public processName: string = "";
-  public processCapacity: number = 1;
-  public workInProgressLimit: number = 4;
+  public processCapacity: number;
+  public workInProgressLimit: number;
 
   public taskName: string = "";
-  public taskEffort: number = 1;
+  public taskEffort: number;
 
   public simulate() {
     this.processList.forEach(process => console.log(process.name) + " " + console.log(process.inputQueue) + " " + console.log(process.outputQueue) + " " + console.log(process.capacity))
@@ -45,16 +45,16 @@ export class HomeComponent implements OnInit {
     this.processCounter++;
 
     this.processList.push(process);
-    this.processCapacity = 1;
+   // this.processCapacity = 1;
     this.processName = "";
-    this.workInProgressLimit = 4;
+    //this.workInProgressLimit = 4;
   }
 
   // TODO(team) add effort
   public addTask() {
     const task = new Task(this.taskName, this.taskEffort);
     this.backlog.taskList.push(task);
-    this.taskEffort = 1;
+    // this.taskEffort = 1;
     this.taskName = "";
   }
 
@@ -92,6 +92,8 @@ export class HomeComponent implements OnInit {
     this.taskEffort = 2;
     this.taskName = 'task6';
     this.addTask();
+
+    this.taskEffort = null;
   }
 
 }

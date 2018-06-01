@@ -10,8 +10,12 @@ export class Process {
   public outputQueue: EntityQueue;
 
   constructor(capacity: number, name: string, workInProgress: number) {
-    if (workInProgress < 1) {
-      throw Error("Work in progress limit must be strictly greater than 0");
+    if (!workInProgress || workInProgress < 1) {
+      workInProgress = 4;
+      // throw Error("Work in progress limit must be strictly greater than 0");
+    }
+    if(!capacity || capacity < 1) {
+      capacity = 1;
     }
     this.capacity = capacity;
     this.name = name;
