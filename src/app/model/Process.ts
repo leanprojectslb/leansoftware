@@ -27,6 +27,7 @@ export class Process {
         for (let i = currentWorkInProgress; i < this.workInProgressLimit; i++) {
             if (this.sourceQueue.taskList.length > 0) {
                 let deletedTaskArray = this.sourceQueue.taskList.splice(0, 1);
+                deletedTaskArray[0].remainingEffort = deletedTaskArray[0].effort;                
                 this.inputQueue.taskList.push(deletedTaskArray[0]);
             }
         }
@@ -76,7 +77,7 @@ export class Process {
     }
 
     private moveElementToNextQueue(task: Task): void {
-        task.remainingEffort = task.effort;
+        task.remainingEffort=0;        
         this.outputQueue.taskList.push(task);
         this.inputQueue.taskList = this.inputQueue.taskList.slice(1, this.inputQueue.taskList.length);
     }

@@ -94,14 +94,14 @@ export class HomeComponent implements OnInit {
     this.addProcess();
     this.processName = 'Development';
     this.processCapacity = 4;
-    this.workInProgressLimit = 4;
-    this.addProcess();
-    this.processName = 'Testing';
-    this.processCapacity = 4;
     this.workInProgressLimit = 3;
     this.addProcess();
+    this.processName = 'Testing';
+    this.processCapacity = 2;
+    this.workInProgressLimit = 2;
+    this.addProcess();
 
-    this.taskEffort = 1;
+    this.taskEffort = 8;
     this.taskName = 'task1';
     this.addTask();
 
