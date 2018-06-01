@@ -8,6 +8,10 @@
     <label> Process Capacity: </label>
     <input type="number" [(ngModel)]="processCapacity"/>
   </div>
+  <div>
+    <label> Work in progress Limit: </label>
+    <input type="number" [(ngModel)]="workInProgressLimit"/>
+  </div>
   <button type="button" (click)="addProcess()"> Add Process</button>
 
   <div>
@@ -40,7 +44,7 @@
      </div>
     <div class="flex-direction: row" *ngFor= "let process of processList;  let i = index">
        <div class="process-box">
-            <span class = "process">{{process.name}} with capacity = {{process.capacity}}</span>
+            <span class = "process">{{process.name}} with capacity = {{process.capacity}} and WIP {{process.workInProgressLimit}}</span>
             <span class="arrow" *ngIf="(i+1) < processList.length">
                 &rarr;
             </span>
