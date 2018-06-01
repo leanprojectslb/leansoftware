@@ -1,5 +1,6 @@
 <h3>Process Simulation Application</h3>
-<div>
+<div class="form flex-container">
+  <div class="processForm flex-direction: column"> 
   <div>
     <label> Process Name: </label>
     <input type="text" [(ngModel)]="processName"/>
@@ -13,8 +14,8 @@
     <input type="number" [(ngModel)]="workInProgressLimit"/>
   </div>
   <button type="button" (click)="addProcess()"> Add Process</button>
-
-  <div>
+</div>
+  <div class="taskForm flex-direction: row">
     <div>
       <label> Task Name: </label>
       <input type="text" [(ngModel)]="taskName"/>
@@ -25,9 +26,10 @@
     </div>
     <button type="button" (click)="addTask()"> Add Task</button>
   </div>
-  <button type="button" (click)="simulate()"> Iterate</button>
 </div>
-
+<hr/>
+<input type="button" (click)="simulate()" value="Iterate"/>
+<hr/>
 <div class = "flex-container" >
     <div class="flex-direction: row">
         <div class="process-box">
