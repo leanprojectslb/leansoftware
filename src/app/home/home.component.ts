@@ -38,11 +38,18 @@ export class HomeComponent implements OnInit {
   }
 
   public calculateAverageThroughput() {
+
     this.totalCycleTime = 0;
     if (this.finalQueue.taskList.length != 0) {
       this.finalQueue.taskList.forEach(task => this.totalCycleTime += task.cycleTime);
       this.avgThroughput = this.totalCycleTime / this.finalQueue.taskList.length;
+      alert("Average Throughput is " +  this.avgThroughput);
+    } else {
+      alert("No task is completed yet");
     }
+
+
+
   }
 
   public calculateCycleTime(task: Task) {
@@ -63,9 +70,9 @@ export class HomeComponent implements OnInit {
     this.processCounter++;
 
     this.processList.push(process);
-   // this.processCapacity = 1;
     this.processName = "";
-    //this.workInProgressLimit = 4;
+    this.processCapacity = null
+    this.workInProgressLimit = null;
   }
 
   public addTask() {
@@ -74,6 +81,7 @@ export class HomeComponent implements OnInit {
     // this.taskEffort = 1;
     this.taskName = "";
     this.totalTaskNumber = this.backlog.taskList.length;
+    this.taskEffort = null;
   }
 
   ngOnInit() {
@@ -111,7 +119,7 @@ export class HomeComponent implements OnInit {
     this.taskName = 'task6';
     this.addTask();
 
-    this.taskEffort = 1;
+    this.taskEffort = null;
   }
 
 }

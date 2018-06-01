@@ -23,9 +23,15 @@
   </div>
 </div>
 <hr/>
-<input type="button" (click)="simulate()" value="Iterate"/>
-<input type="button" (click)="calculateAverageThroughput()" value ="Average throughput"/>
-<input type = "text" [(ngModel)] = "avgThroughput"/>
+<div class="form flex-container">
+  <input type="button" class="flex-direction: column iterate" (click)="simulate()" value="Iterate"/>
+ 
+    <input class="flex-direction: column througput" type="button"  (click)="calculateAverageThroughput()" value ="Average throughput"/>
+    <!-- <input type = "text" [(ngModel)] = "avgThroughput"/> -->
+
+  
+</div>
+
 <hr/>
 <div class = "flex-container" >
     <div class="flex-direction: row">

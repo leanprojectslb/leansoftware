@@ -7,7 +7,7 @@ export class Task {
     public cycleTime : number = 0;
 
     constructor(name: string, effort: number, startTime: number) {
-      if (effort === 0) {
+      if (effort === 0 || !effort) {
         console.log("We don't allow task with effort 0...assigning it to 1");
         effort = 1;
       }
