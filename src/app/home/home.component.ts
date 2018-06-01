@@ -14,7 +14,7 @@ export class HomeComponent implements OnInit {
   public finalQueue: EntityQueue;
   public processCounter = 0;
   public processList: Array<Process> = [];
-  public iterationCounter : number = 0
+  public iterationCounter: number = 0;
   public processName: string = "";
   public processCapacity: number;
   public workInProgressLimit: number;
@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   public totalCycleTime = 0;
   public avgThroughput = 0;
   public totalTaskNumber = 0;
-  
+
   public simulate() {
     this.iterationCounter++;
     this.processList.forEach(process => console.log(process.name) + " " + console.log(process.inputQueue) + " " + console.log(process.outputQueue) + " " + console.log(process.capacity))
@@ -34,19 +34,19 @@ export class HomeComponent implements OnInit {
       this.processList[i].doWork();
     }
 
-    this.finalQueue.taskList.forEach(task => this.calculateCycleTime(task))    
+    this.finalQueue.taskList.forEach(task => this.calculateCycleTime(task));
   }
 
   public calculateAverageThroughput() {
     this.totalCycleTime = 0;
-    if(this.finalQueue.taskList.length !=0 ){    
-    this.finalQueue.taskList.forEach(task => this.totalCycleTime +=  task.cycleTime);
-    this.avgThroughput = this.totalCycleTime / this.finalQueue.taskList.length;
+    if (this.finalQueue.taskList.length != 0) {
+      this.finalQueue.taskList.forEach(task => this.totalCycleTime += task.cycleTime);
+      this.avgThroughput = this.totalCycleTime / this.finalQueue.taskList.length;
     }
   }
 
-  public calculateCycleTime(task : Task) {
-     if(task.cycleTime === 0)
+  public calculateCycleTime(task: Task) {
+    if (task.cycleTime === 0)
       task.cycleTime = this.iterationCounter - task.startTime
   }
 
@@ -68,7 +68,6 @@ export class HomeComponent implements OnInit {
     //this.workInProgressLimit = 4;
   }
 
-  // TODO(team) add effort
   public addTask() {
     const task = new Task(this.taskName, this.taskEffort, this.iterationCounter);
     this.backlog.taskList.push(task);
@@ -112,7 +111,7 @@ export class HomeComponent implements OnInit {
     this.taskName = 'task6';
     this.addTask();
 
-    this.taskEffort = null;
+    this.taskEffort = 1;
   }
 
 }
