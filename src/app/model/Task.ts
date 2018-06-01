@@ -2,6 +2,7 @@ export class Task {
     public name: string;
     public effort: number;
     public remainingEffort: number;
+    public cycleTime: number = 4;
 
     constructor(name: string, effort: number) {
       if (!effort || effort === 0) {

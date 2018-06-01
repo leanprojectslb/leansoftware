@@ -20,8 +20,11 @@ export class HomeComponent implements OnInit {
   public workInProgressLimit: number;
 
   public taskName: string = "";
-  public taskEffort: number;
-
+  public taskEffort: number = 1;
+  public totalCycleTime = 0;
+  public avgThroughput = 0;
+  public totalTaskNumber = 0;
+  
   public simulate() {
     this.processList.forEach(process => console.log(process.name) + " " + console.log(process.inputQueue) + " " + console.log(process.outputQueue) + " " + console.log(process.capacity))
     this.backlog.taskList.forEach(task => console.log(task));
@@ -29,6 +32,11 @@ export class HomeComponent implements OnInit {
     for (let i = this.processList.length - 1; i > -1; i--) {
       this.processList[i].doWork();
     }
+  }
+
+  public calculateAverageThroughput() {
+    this.processList.forEach(process => process.outputQueue.taskList.forEach(task => this.totalCycleTime = this.totalCycleTime + task.cycleTime));
+    this.avgThroughput = this.totalCycleTime / this.totalTaskNumber;
   }
 
 
@@ -56,6 +64,7 @@ export class HomeComponent implements OnInit {
     this.backlog.taskList.push(task);
     // this.taskEffort = 1;
     this.taskName = "";
+    this.totalTaskNumber = this.backlog.taskList.length;
   }
 
   ngOnInit() {
